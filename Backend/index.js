@@ -10,7 +10,10 @@ const app = express();
 
 
 app.use(express.json()); 
-app.use(cors());
+app.use(cors({
+  origin: 'https://learn-sphere-frontend-two.vercel.app', 
+  credentials: true,
+}));
 
 
 connectdb();
