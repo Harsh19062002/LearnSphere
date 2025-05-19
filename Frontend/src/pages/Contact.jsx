@@ -41,7 +41,7 @@ export default function Contact() {
     <div className="min-h-screen bg-indigo-100 px-4 py-10">
       <Toaster position="top-right" reverseOrder={false} />
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-indigo-900 mb-4">Contact Us</h1>
+        <h1 className="text-4xl font-bold text-red-500 mb-4">Contact Us</h1>
         <p className="text-indigo-700 mb-10">
           Got questions? Reach out to us! We’re here to help you with any inquiries.
         </p>
