@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import axios from "axios";
 
@@ -9,7 +9,7 @@ export default function Contact() {
     message: "",
   });
 
-  const buttonRef = useRef(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -23,10 +23,7 @@ export default function Contact() {
       return;
     }
 
-    buttonRef.current.classList.add("scale-95");
-    setTimeout(() => {
-      buttonRef.current.classList.remove("scale-95");
-    }, 100);
+    setIsSubmitting(true);
 
     try {
       const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/user`, form);
@@ -35,6 +32,8 @@ export default function Contact() {
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.error || "Something went wrong!");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -85,11 +84,13 @@ export default function Contact() {
             ></textarea>
           </div>
           <button
-            ref={buttonRef}
             type="submit"
-            className="w-full bg-indigo-700 text-white py-3 rounded-md font-semibold hover:bg-indigo-800 transition-transform duration-150"
+            disabled={isSubmitting}
+            className={`w-full bg-indigo-700 text-white py-3 rounded-md font-semibold transition-colors duration-200 ${
+              isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:bg-indigo-800"
+            }`}
           >
-            Send Message
+            {isSubmitting ? "Submitting..." : "Send Message"}
           </button>
         </form>
 
