@@ -27,7 +27,7 @@ export default function Contact() {
 
     try {
       const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/user`, form);
-      toast.success(res.data.message || "Message sent successfully!");
+      toast.success(res.data.message || "Our Team Will Contact You Soon !");
       setForm({ name: "", email: "", message: "" });
     } catch (error) {
       console.error(error);
